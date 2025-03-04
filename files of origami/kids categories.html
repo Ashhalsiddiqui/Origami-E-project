@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kIDS CATEGORIES</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 1px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --clr: #222327;
+        }
+
+        body {
+            background-color: var(--clr);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 5px;
+            z-index: 1000;
+            width: 400px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        .navigation ul {
+            display: flex;
+            width: 350px;
+        }
+
+        .navigation ul li {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            list-style: none;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            transition: 0.5s;
+            color: rgb(255, 255, 255);
+        }
+
+        .navigation ul li.active a .icon {
+            transform: translateY(-30px);
+            color: #000000;
+        }
+
+        .navigation ul li a .text {
+            position: absolute;
+            color: white;
+            font-weight: 400;
+            font-size: 0.75em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .navigation ul li.active a .text {
+            transform: translateY(10px);
+            opacity: 1;
+            color: #29fd53;
+        }
+
+        .indicator {
+            position: absolute;
+            top: -20px;
+            width: 70px;
+            height: 70px;
+            background: #29fd53;
+            border-radius: 50%;
+            border: 6px solid var(--clr);
+            transition: 0.5s;
+        }
+
+        .indicator::before,
+        .indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .navigation ul li:nth-child(1).active~.indicator {
+            transform: translateX(calc(70px * 0));
+        }
+
+        .navigation ul li:nth-child(2).active~.indicator {
+            transform: translateX(calc(70px * 1));
+        }
+
+        .navigation ul li:nth-child(3).active~.indicator {
+            transform: translateX(calc(70px * 2));
+        }
+
+        .navigation ul li:nth-child(4).active~.indicator {
+            transform: translateX(calc(70px * 3));
+        }
+
+        .navigation ul li:nth-child(5).active~.indicator {
+            transform: translateX(calc(70px * 4));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #111;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            padding-left: 20px;
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #fd2929;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 15px rgb(255, 19, 19);
+            animation: diamond-animation 2s infinite alternate ease-in-out;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @keyframes diamond-animation {
+            0% {
+                transform: rotate(0deg) scale(1);
+                box-shadow: 0px 0px 10px rgb(255, 0, 0);
+            }
+
+            100% {
+                transform: rotate(45deg) scale(1.1);
+                box-shadow: 0px 0px 20px rgb(255, 0, 0);
+            }
+        }
+
+        footer {
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer .top-line,
+        .footer .bottom-line {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer .top-line p,
+        .footer .top-line a,
+        .footer .bottom-line a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .footer .top-line a:hover,
+        .footer .bottom-line a:hover {
+            color: red;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-media a {
+            color: white;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .social-media a:hover {
+            color: red;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --clr: #222327;
+        }
+
+        body {
+            background-color: var(--clr);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 5px;
+            z-index: 1000;
+            width: 400px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        .navigation ul {
+            display: flex;
+            width: 350px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 250px;
+            padding: 100px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .card {
+            width: 220px;
+            height: 280px;
+            border: 2px solid green;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.5);
+            transition: transform 0.3s ease-in-out, border-color 0.3s;
+            animation: float 2s infinite alternate ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            border-color: green;
+            transform: scale(1.05);
+            border-color: limegreen;
+            box-shadow: 0px 8px 20px rgba(0, 255, 0, 0.8);
+        }
+
+        .card img {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            padding: 10px;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .btn:hover {
+            background: limegreen;
+            color: white;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #f4f4f4;
+            color: black;
+            font-weight: bold;
+            padding: 10px;
+            border-top: 2px solid green;
+            font-size: 16px;
+            line-height: 1.3;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .neonlights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #backgroundVideo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="neonlights">
+        <video autoplay muted loop id="backgroundVideo">
+            <source src="Multiverse Dimensional Space Travel Background Effect Footage + Sound.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="logo-container">
+        <img src="origami website logo.jpg" alt="Logo">
+    </div>
+    <div class="navigation">
+        <ul>
+            <li class="list active">
+                <a href="navbar.html">
+                    <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="text">Home</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="gallery.html">
+                    <span class="icon"><ion-icon name="image-outline"></ion-icon></span>
+                    <span class="text">Gallery</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="ahadaboutus.html">
+                    <span class="icon"><ion-icon name="body-outline"></ion-icon></span>
+                    <span class="text">About Us</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="emancontactus.html">
+                    <span class="icon"><ion-icon name="megaphone-outline"></ion-icon></span>
+                    <span class="text">Contact Us</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="sanafeedbackform.html">
+                    <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                    <span class="text">Feedback</span>
+                </a>
+            </li>
+            <div class="indicator"></div>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <img src="faces-removebg-preview.png" alt="Image 1">
+                <a href="Kidsfacespage.html" class="btn">FACE</a>
+
+            </div>
+            <div class="card">
+                <img src="Animals-removebg-preview.png" alt="Image 2">
+                <a href="kidsanimalpage.html" class="btn">ANIMALS</a>
+            </div>
+            <div class="card">
+                <img src="birds-removebg-preview.png" alt="Image 3">
+                <a href="kidsbirdspage.html" class="btn">BIRDS</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <img src="objects-removebg-preview.png" alt="Image 4">
+                <a href="kidsobjectpage.html" class="btn">OBJECT</a>
+            </div>
+            <div class="card">
+                <img src="decorations-removebg-preview.png" alt="Image 5">
+                <a href="kidsdecorationspage.html" class="btn">DECORATIONS</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <footer>
+        <div class="footer">
+            <div class="top-line">
+                <p>© 2021 Origami Dreams. All rights reserved.</p>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="bottom-line">
+                <a href="#">FAQ</a>
+                <div class="social-media">
+                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
